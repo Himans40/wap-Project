@@ -23,7 +23,6 @@ Open Library API - https://openlibrary.org/developers/api
 
 ## 🛠 Technologies Used
 
-* React.js
 * JavaScript (ES6)
 * CSS / Tailwind (optional)
 * Fetch API

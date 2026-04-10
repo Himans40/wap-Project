@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css">
+    <title>About Us - BookFinder</title>
+  </head>
+  <body>
+    <div id="navbar">
+      <div class="logo">
+        <img src="https://testcub1.s3.amazonaws.com/static/img/slider/1.jpg" alt="Logo">
+        <span>BookFinder</span>
+      </div>
+      <div class="navitem">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Service</a>
+        <a href="about.html">About Us</a>
+      </div>
+      <div class="nav-buttons">
+        <button id="darkToggle">🌙</button>
+        <button onclick="window.location='index.html'">Login</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <h1>About Us</h1>
+      <div class="about-section">
+        <h2>Who We Are</h2>
+        <p>BookFinder is a simple web application built to help readers discover books from Google's massive book database. Whether you're looking for programming guides, novels, or academic textbooks — we've got you covered.</p>
+      </div>
+      <div class="about-section">
+        <h2>Our Mission</h2>
+        <p>Our mission is to make book discovery easy and accessible for everyone. Just type a keyword, filter by author or year, and explore thousands of books instantly.</p>
+      </div>
+      <div class="about-section">
+        <h2>Technology Used</h2>
+        <p>This project is built using HTML, CSS, and vanilla JavaScript. It fetches real-time data from the Google Books API using async/await and the Fetch API.</p>
+      </div>
+      <div class="about-section">
+        <h2>The Team</h2>
+        <p>This project was developed as a first-year B.Tech project to learn and practice web development fundamentals including DOM manipulation, API integration, and responsive design.</p>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("darkToggle").addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        const btn = document.getElementById("darkToggle");
+        btn.innerText = document.body.classList.contains("dark") ? "☀️" : "🌙";
+      });
+    </script>
+  </body>
+</html>

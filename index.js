@@ -6,6 +6,36 @@ const yearInput = document.getElementById("yearSearch");
 const btn = document.getElementById("btn");
 const filterButton = document.getElementById("filterbutton");
 const bookList = document.getElementById("main");
+const darkToggle = document.getElementById("darkToggle");
+const loginBtn = document.getElementById("loginBtn");
+const loginOverlay = document.getElementById("loginOverlay");
+const closeModal = document.getElementById("closeModal");
+
+// dark mode toggle
+darkToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  if (document.body.classList.contains("dark")) {
+    darkToggle.innerText = "☀️";
+  } else {
+    darkToggle.innerText = "🌙";
+  }
+});
+
+// login modal open/close
+loginBtn.addEventListener("click", () => {
+  loginOverlay.classList.add("show");
+});
+
+closeModal.addEventListener("click", () => {
+  loginOverlay.classList.remove("show");
+});
+
+// close modal when clicking outside
+loginOverlay.addEventListener("click", (e) => {
+  if (e.target === loginOverlay) {
+    loginOverlay.classList.remove("show");
+  }
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   searchGoogleBooks("programming");
@@ -83,8 +113,16 @@ function renderBooks(books) {
   books.forEach(book => {
     const info = book.volumeInfo;
 
+    // outer container for flip effect
+    const cardContainer = document.createElement("div");
+    cardContainer.classList.add("card-container");
+
     const bookListCard = document.createElement("div");
     bookListCard.classList.add("bookListCard");
+
+    // front side
+    const front = document.createElement("div");
+    front.classList.add("card-front");
 
     const img = document.createElement("img");
     const title = document.createElement("h3");
@@ -100,11 +138,35 @@ function renderBooks(books) {
     yearText.style.color = "gray"; 
     yearText.style.fontSize = "14px";
 
-    bookListCard.appendChild(img);
-    bookListCard.appendChild(title);
-    bookListCard.appendChild(authorText);
-    bookListCard.appendChild(yearText);
+    front.appendChild(img);
+    front.appendChild(title);
+    front.appendChild(authorText);
+    front.appendChild(yearText);
 
-    bookList.appendChild(bookListCard);
+    // back side - summary
+    const back = document.createElement("div");
+    back.classList.add("card-back");
+
+    const backTitle = document.createElement("h3");
+    backTitle.innerText = info.title || "No Title";
+
+    const summary = document.createElement("p");
+    if (info.description) {
+      // show first 300 characters of description
+      summary.innerText = info.description.length > 300
+        ? info.description.substring(0, 300) + "..."
+        : info.description;
+    } else {
+      summary.innerText = "No summary available for this book.";
+    }
+
+    back.appendChild(backTitle);
+    back.appendChild(summary);
+
+    // put it all together
+    bookListCard.appendChild(front);
+    bookListCard.appendChild(back);
+    cardContainer.appendChild(bookListCard);
+    bookList.appendChild(cardContainer);
   });
 }

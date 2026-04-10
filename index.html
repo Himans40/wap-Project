@@ -5,30 +5,56 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="index.css">
-    <title>wap-project</title>
+    <title>Book Finder</title>
   </head>
   <body>
     <div id="navbar">
-      <img src="" alt="">
-      <div class="navitem">
-        <a>Home</a>
-        <a>Contact</a>
-        <a>Service</a>
-        <a>Home</a>
-
+      <div class="logo">
+        <img src="https://testcub1.s3.amazonaws.com/static/img/slider/1.jpg" alt="Logo">
+        <span>BookFinder</span>
       </div>
-      <button>Login</button>
-
-
+      <div class="navitem">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Service</a>
+        <a href="about.html">About Us</a>
+      </div>
+      <div class="nav-buttons">
+        <button id="darkToggle">🌙</button>
+        <button id="loginBtn">Login</button>
+      </div>
     </div>
-    <div id="props">
-      <input type="text" id="search" placeholder="Search books..." />
-      <button id="btn">Search</button>
+
+    <!-- Login Modal -->
+    <div id="loginOverlay">
+      <div id="loginModal">
+        <button id="closeModal">&times;</button>
+        <h2>Welcome Back</h2>
+        <p class="modal-subtitle">Sign in to continue</p>
+        <form onsubmit="return false;">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+          <button type="submit" class="signin-btn">Sign In</button>
+        </form>
+        <div class="modal-links">
+          <a href="#">Forgot Password?</a>
+          <a href="#">Create an account</a>
+        </div>
+      </div>
     </div>
-    <div id="filter">
-      <input type="text" id="authorSearch" placeholder="Global Author Search (e.g. Rowling)">
-      <input type="number" id="yearSearch" placeholder="Global Year Search (e.g. 2023)">
-      <button id="filterbutton">Filter</button>
+
+    <div id="hero">
+      <div id="props">
+        <input type="text" id="search" placeholder="Search books..." />
+        <button id="btn">Search</button>
+      </div>
+      <div id="filter">
+        <input type="text" id="authorSearch" placeholder="Global Author Search (e.g. Rowling)">
+        <input type="number" id="yearSearch" placeholder="Global Year Search (e.g. 2023)">
+        <button id="filterbutton">Filter</button>
+      </div>
     </div>
     <div id="main">
     </div>

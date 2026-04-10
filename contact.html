@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css">
+    <title>Contact - BookFinder</title>
+  </head>
+  <body>
+    <div id="navbar">
+      <div class="logo">
+        <img src="https://testcub1.s3.amazonaws.com/static/img/slider/1.jpg" alt="Logo">
+        <span>BookFinder</span>
+      </div>
+      <div class="navitem">
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <a href="#">Service</a>
+        <a href="about.html">About Us</a>
+      </div>
+      <div class="nav-buttons">
+        <button id="darkToggle">🌙</button>
+        <button onclick="window.location='index.html'">Login</button>
+      </div>
+    </div>
+
+    <div class="page-content">
+      <h1>Contact Us</h1>
+      <div class="contact-form">
+        <form onsubmit="alert('Message sent! Thank you.'); return false;">
+          <label for="name">Your Name</label>
+          <input type="text" id="name" placeholder="Enter your name" required>
+
+          <label for="contactEmail">Your Email</label>
+          <input type="email" id="contactEmail" placeholder="Enter your email" required>
+
+          <label for="message">Message</label>
+          <textarea id="message" rows="5" placeholder="Write your message..." required></textarea>
+
+          <button type="submit" class="signin-btn">Send Message</button>
+        </form>
+      </div>
+      <div class="contact-info">
+        <h2>Other Ways to Reach Us</h2>
+        <p>Email: bookfinder@example.com</p>
+        <p>Phone: +91 98765 43210</p>
+        <p>Location: New Delhi, India</p>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById("darkToggle").addEventListener("click", () => {
+        document.body.classList.toggle("dark");
+        const btn = document.getElementById("darkToggle");
+        btn.innerText = document.body.classList.contains("dark") ? "☀️" : "🌙";
+      });
+    </script>
+  </body>
+</html>

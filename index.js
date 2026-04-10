@@ -11,7 +11,7 @@ const loginBtn = document.getElementById("loginBtn");
 const loginOverlay = document.getElementById("loginOverlay");
 const closeModal = document.getElementById("closeModal");
 
-// dark mode toggle
+
 darkToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
   if (document.body.classList.contains("dark")) {
@@ -21,7 +21,7 @@ darkToggle.addEventListener("click", () => {
   }
 });
 
-// login modal open/close
+
 loginBtn.addEventListener("click", () => {
   loginOverlay.classList.add("show");
 });
@@ -30,7 +30,7 @@ closeModal.addEventListener("click", () => {
   loginOverlay.classList.remove("show");
 });
 
-// close modal when clicking outside
+
 loginOverlay.addEventListener("click", (e) => {
   if (e.target === loginOverlay) {
     loginOverlay.classList.remove("show");
@@ -113,14 +113,14 @@ function renderBooks(books) {
   books.forEach(book => {
     const info = book.volumeInfo;
 
-    // outer container for flip effect
+    
     const cardContainer = document.createElement("div");
     cardContainer.classList.add("card-container");
 
     const bookListCard = document.createElement("div");
     bookListCard.classList.add("bookListCard");
 
-    // front side
+    
     const front = document.createElement("div");
     front.classList.add("card-front");
 
@@ -143,7 +143,7 @@ function renderBooks(books) {
     front.appendChild(authorText);
     front.appendChild(yearText);
 
-    // back side - summary
+
     const back = document.createElement("div");
     back.classList.add("card-back");
 
@@ -152,7 +152,7 @@ function renderBooks(books) {
 
     const summary = document.createElement("p");
     if (info.description) {
-      // show first 300 characters of description
+      
       summary.innerText = info.description.length > 300
         ? info.description.substring(0, 300) + "..."
         : info.description;
@@ -163,7 +163,6 @@ function renderBooks(books) {
     back.appendChild(backTitle);
     back.appendChild(summary);
 
-    // put it all together
     bookListCard.appendChild(front);
     bookListCard.appendChild(back);
     cardContainer.appendChild(bookListCard);

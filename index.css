@@ -9,7 +9,7 @@ body {
   background-color: #F3F4F6;
 }
 
-/* ---- NAVBAR ---- */
+
 
 #navbar {
   width: 100%;
@@ -77,7 +77,7 @@ body {
   background-color: #d97706;
 }
 
-/* ---- LOGIN MODAL ---- */
+
 
 #loginOverlay {
   display: none;
@@ -191,7 +191,7 @@ body {
   color: #111827;
 }
 
-/* ---- HERO SECTION ---- */
+
 
 #hero {
   background-image: url("https://testcub1.s3.amazonaws.com/static/img/slider/1.jpg");
@@ -200,7 +200,7 @@ body {
   padding: 40px 20px;
 }
 
-/* ---- SEARCH BAR ---- */
+
 
 #props {
   display: flex;
@@ -234,7 +234,7 @@ body {
   background-color: #d97706;
 }
 
-/* ---- FILTER ---- */
+
 
 #filter {
   display: flex;
@@ -269,7 +269,7 @@ body {
   color: #111827;
 }
 
-/* ---- MAIN BOOK GRID ---- */
+
 
 #main {
   width: 90%;
@@ -286,7 +286,7 @@ body {
   color: #111827;
 }
 
-/* ---- FLIP CARD ---- */
+
 
 .card-container {
   perspective: 800px;
@@ -366,7 +366,7 @@ body {
   margin-bottom: 3px;
 }
 
-/* =========== DARK MODE =========== */
+
 
 body.dark {
   background-color: #111827;
@@ -439,7 +439,7 @@ body.dark #closeModal {
   color: #9ca3af;
 }
 
-/* ---- ABOUT & CONTACT PAGES ---- */
+
 
 .page-content {
   width: 70%;
@@ -524,7 +524,7 @@ body.dark #closeModal {
   margin-bottom: 5px;
 }
 
-/* dark mode for about/contact */
+
 
 body.dark .page-content h1 {
   color: #F3F4F6;

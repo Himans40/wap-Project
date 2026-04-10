@@ -1,16 +1,15 @@
-const GB_API = "https://www.googleapis.com/books/v1/volumes";
+const apiUrl = "https://www.googleapis.com/books/v1/volumes";
 
 const input = document.getElementById("search");
 const authorInput = document.getElementById("authorSearch");
 const yearInput = document.getElementById("yearSearch");
 const btn = document.getElementById("btn");
 const filterButton = document.getElementById("filterbutton");
-const bookList = document.getElementById("main");
+const list = document.getElementById("main");
 const darkToggle = document.getElementById("darkToggle");
 const loginBtn = document.getElementById("loginBtn");
 const loginOverlay = document.getElementById("loginOverlay");
 const closeModal = document.getElementById("closeModal");
-
 
 darkToggle.addEventListener("click", () => {
   document.body.classList.toggle("dark");
@@ -21,7 +20,6 @@ darkToggle.addEventListener("click", () => {
   }
 });
 
-
 loginBtn.addEventListener("click", () => {
   loginOverlay.classList.add("show");
 });
@@ -30,7 +28,6 @@ closeModal.addEventListener("click", () => {
   loginOverlay.classList.remove("show");
 });
 
-
 loginOverlay.addEventListener("click", (e) => {
   if (e.target === loginOverlay) {
     loginOverlay.classList.remove("show");
@@ -38,89 +35,87 @@ loginOverlay.addEventListener("click", (e) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  searchGoogleBooks("programming");
+  getBooks("scifi");
 });
 
-function handleSearchRequest() {
-  let apiQuery = "";
-  const mainTopic = input ? input.value.trim() : "";
+function handleSearch() {
+  let query = "";
+  const topic = input ? input.value.trim() : "";
   const author = authorInput.value.trim();
   const year = yearInput.value.trim();
 
-  if (mainTopic) {
-    apiQuery += mainTopic;
+  if (topic) {
+    query += topic;
   } else if (!author && !year) {
-    apiQuery += "programming";
+    query += "scifi";
   }
 
   if (author) {
-    apiQuery += `+inauthor:"${author}"`;
+    query += `+inauthor:"${author}"`;
   }
 
   if (year) {
-    apiQuery += `+${year}`;
+    query += `+${year}`;
   }
 
-  if (apiQuery.startsWith("+")) {
-    apiQuery = apiQuery.substring(1);
+  if (query.startsWith("+")) {
+    query = query.substring(1);
   }
 
-  searchGoogleBooks(apiQuery, year);
+  getBooks(query, year);
 }
 
-btn.addEventListener("click", handleSearchRequest);
-filterButton.addEventListener("click", handleSearchRequest);
+btn.addEventListener("click", handleSearch);
+filterButton.addEventListener("click", handleSearch);
 
-async function searchGoogleBooks(query, targetYear = "") {
-  bookList.innerHTML = "<h2>Searching Google's entire database...</h2>";
+async function getBooks(q, targetYear = "") {
+  list.innerHTML = "<h2>Searching books...</h2>";
 
   try {
-    const res = await fetch(`${GB_API}?q=${encodeURIComponent(query)}&maxResults=40`);
+    const res = await fetch(`${apiUrl}?q=${encodeURIComponent(q)}&maxResults=40`);
     if (!res.ok) throw new Error("API Error");
     const data = await res.json();
     
     if (!data.items) {
-      bookList.innerHTML = "<h2>No results found in the global database.</h2>";
+      list.innerHTML = "<h2>No results found.</h2>";
       return;
     }
 
-    let fetchedBooks = data.items;
+    let items = data.items;
 
     if (targetYear !== "") {
-      fetchedBooks = fetchedBooks.filter(book => {
+      items = items.filter(book => {
          const info = book.volumeInfo;
          const pubYear = info.publishedDate ? info.publishedDate.split('-')[0] : "";
          return pubYear === targetYear;
       });
     }
 
-    renderBooks(fetchedBooks);
+    displayBooks(items);
 
   } catch (err) {
-    bookList.innerHTML = "<h2>Error fetching data</h2>";
+    list.innerHTML = "<h2>Error loading data</h2>";
     console.error(err);
   }
 }
 
-function renderBooks(books) {
-  bookList.innerHTML = "";
+function displayBooks(books) {
+  list.innerHTML = "";
 
   if (books.length === 0) {
-    bookList.innerHTML = "<h2>No books perfectly matched your strict year/author criteria.</h2>";
+    list.innerHTML = "<h2>No books matched your criteria.</h2>";
     return;
   }
 
   books.forEach(book => {
     const info = book.volumeInfo;
 
-    
-    const cardContainer = document.createElement("div");
-    cardContainer.classList.add("card-container");
+    const container = document.createElement("div");
+    container.classList.add("card-container");
 
-    const bookListCard = document.createElement("div");
-    bookListCard.classList.add("bookListCard");
+    const card = document.createElement("div");
+    card.classList.add("bookListCard");
 
-    
     const front = document.createElement("div");
     front.classList.add("card-front");
 
@@ -143,7 +138,6 @@ function renderBooks(books) {
     front.appendChild(authorText);
     front.appendChild(yearText);
 
-
     const back = document.createElement("div");
     back.classList.add("card-back");
 
@@ -152,20 +146,19 @@ function renderBooks(books) {
 
     const summary = document.createElement("p");
     if (info.description) {
-      
       summary.innerText = info.description.length > 300
         ? info.description.substring(0, 300) + "..."
         : info.description;
     } else {
-      summary.innerText = "No summary available for this book.";
+      summary.innerText = "No summary available.";
     }
 
     back.appendChild(backTitle);
     back.appendChild(summary);
 
-    bookListCard.appendChild(front);
-    bookListCard.appendChild(back);
-    cardContainer.appendChild(bookListCard);
-    bookList.appendChild(cardContainer);
+    card.appendChild(front);
+    card.appendChild(back);
+    container.appendChild(card);
+    list.appendChild(container);
   });
 }
